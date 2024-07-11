@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "749779324985",
+    "project_id": "msgprogram-d0c15",
+    "storage_bucket": "msgprogram-d0c15.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:749779324985:android:93532c9fa6125fbc1fbde8",
+        "android_client_info": {
+          "package_name": "com.example.kakao_program"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1zhgX74Jn9PDzxUWt1sZgOCPXMscvx-A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

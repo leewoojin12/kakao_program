@@ -27,6 +27,8 @@
 
     final TextEditingController _emailController = TextEditingController();
 
+    var publicID ;
+
 
     @override
     Future<void> getUser() async {
@@ -43,6 +45,7 @@
           final data =json.decode(response.body);
           String memberInfo = ' ';
           memberInfo = data;// 전체 JSON 응답 출력
+
 
           print(memberInfo);
       } else {
@@ -67,6 +70,7 @@
 
     Future<void> _login (BuildContext context) async {
       try {
+        publicID = _nickController;
         print('시도합니다'); // 디버그 메시지 출력
         final response = await http.post(
           Uri.parse('http://10.0.2.2:8080/members/Login'), // Spring Boot API URL

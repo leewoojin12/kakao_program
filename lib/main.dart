@@ -34,6 +34,9 @@ options: DefaultFirebaseOptions.currentPlatform,
   }));// 홈 페이지 경로를 추가합니다.:},));
 }
 
+
+
+
 class MyApp extends StatefulWidget {
   MyApp({Key? key}) : super(key: key);
 
@@ -47,6 +50,32 @@ class _MyAppState extends State<MyApp> {
   var tab = 0;
   var hello;
   var userImage;
+  late String friendname;
+  late String friendID;
+  late String sortedNames;
+
+  late List <String > check ;
+
+
+
+  get (){
+    friendname = 'zxsa999o';
+    friendID = login.Username;
+
+    sortedNames = friendID + friendname;
+    List<String > name = [sortedNames];
+    name.sort();
+    check = name;
+    print(check);
+  }
+
+
+
+    // login.Username이 null이 아닌지 확인
+
+     // 리스트가 제대로 정의되었는지 확인
+
+
 
 
   List<Contact> peoplelist = [];
@@ -65,8 +94,8 @@ class _MyAppState extends State<MyApp> {
 
     getPermission();
 
-  }
 
+  }
 
   getPermission() async {
     //핸드폰에서 연락처 불러오기
@@ -119,8 +148,10 @@ class _MyAppState extends State<MyApp> {
           IconButton(
               onPressed: () {
                 getPermission();
-                print(peoplelist);
+                print('');
+                get ();
               },
+
               icon: Icon(Icons.abc)),
         ],
       ),
@@ -176,10 +207,10 @@ class _MyAppState extends State<MyApp> {
                               ),
                             ),
                             myprofile(
-                              primalystack: primalystack,userImage: userImage
+                              primalystack: primalystack,userImage: userImage ,
                             ),
                             updatefriend(),
-                            myprofile2(userImage: userImage
+                            myprofile2(userImage: userImage ,
                             ),
                           ],
                         ))
@@ -309,10 +340,10 @@ class _myprofileState extends State<myprofile> {
 }
 
 class myprofile2 extends StatelessWidget {
-  myprofile2({super.key, this.userImage,});
-
+  myprofile2({super.key, this.userImage,this.sortedNames});
 
   final userImage;
+  final sortedNames;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -353,7 +384,7 @@ class myprofile2 extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            '우진',
+                            '시발련아',
                             style: TextStyle(
                                 fontWeight: FontWeight.w100,
                                 color: Colors.white,
@@ -362,15 +393,16 @@ class myprofile2 extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Container(
-                      height: 70,
+
+// 사진 체인지 하는거 연습본
+/*                   height: 70,
                       width: 70,
                       color: Colors.white,
 
                       //child: Image.asset('assets/'),
                       child: userImage != null? Image.file(userImage) : Image.asset('assets/profile.jpg' ,fit: BoxFit.cover,
                       ),
-                    ),
+                    ),*/
                   ],
                 )),
           ],

@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'loginPage.dart' as login;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'firebase_options.dart';
 
 
@@ -25,17 +24,39 @@ class _MsgchatState extends State<Msgchat> {
 
   final TextEditingController TextEdit = TextEditingController();
 
+  late String roomname;
   String inputText = ' ';
+  late String friendname;
+  late String friendID;
+  late String sortedNames;
+
+  late List <String > check ;
+
+
+  get (){
+    friendname = 'zxsa999o';
+    friendID = login.Username;
+
+    sortedNames = friendID + friendname;
+    List<String > name = [sortedNames];
+    name.sort();
+    check = name;
+    print(check);
+
+  }
+
 
   @override
   void initState() {
     super.initState();
+    get();
+
   }
 
   void _sendMessage() {
     final text = TextEdit.text.trim();
     if (text.isNotEmpty) {
-      FirebaseFirestore.instance.collection('chatRooms').doc(login.Username).collection('messages').add({
+      FirebaseFirestore.instance.collection('chatRooms').doc(login.Username).collection(check[0]).add({
         'text': text,
         'sender': login.Username, // Spring Boot에서 받아온 사용자 ID 또는 닉네임을 사용
         'timestamp': Timestamp.now(),
@@ -61,7 +82,7 @@ class _MsgchatState extends State<Msgchat> {
               stream: FirebaseFirestore.instance
                   .collection('chatRooms')
                   .doc(login.Username)
-                  .collection('messages')
+                  .collection(check[0])
                   .orderBy('timestamp', descending: true)
                   .snapshots(),
               builder: (context, snapshot) {
@@ -135,7 +156,7 @@ class _MsgchatState extends State<Msgchat> {
                   IconButton(
                       onPressed: () {
                         setState(() {
-                          print(chat);
+                          print(check);
                         });
                       },
                       icon: Icon(Icons.abc)),

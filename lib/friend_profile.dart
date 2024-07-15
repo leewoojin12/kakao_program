@@ -72,7 +72,7 @@ class friendEdit extends StatelessWidget {
               )),
               SizedBox(
                 width: 10,
-                height: 400,
+                height: 200,
                 child: Container(
                   width: 20,
                 ),

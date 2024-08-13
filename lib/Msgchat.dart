@@ -31,17 +31,19 @@ class _MsgchatState extends State<Msgchat> {
   late String sortedNames;
 
   late List <String > check ;
-
+  String sortname= ' ';
 
   get (){
-    friendname = 'zxsa999o';
-    friendID = login.Username;
-
+    friendname = login.Username;
+    friendID = login.friendlist[0];
     sortedNames = friendID + friendname;
-    List<String > name = [sortedNames];
-    name.sort();
-    check = name;
-    print(check);
+
+    List<String> name = sortedNames.split('')..sort();
+    String sortedString = name.join('');
+
+    sortname = sortedString;
+    print(sortname);
+
 
   }
 
@@ -56,7 +58,7 @@ class _MsgchatState extends State<Msgchat> {
   void _sendMessage() {
     final text = TextEdit.text.trim();
     if (text.isNotEmpty) {
-      FirebaseFirestore.instance.collection('chatRooms').doc(login.Username).collection(check[0]).add({
+      FirebaseFirestore.instance.collection('chatRooms').doc(sortname).collection('messages').add({
         'text': text,
         'sender': login.Username, // Spring Boot에서 받아온 사용자 ID 또는 닉네임을 사용
         'timestamp': Timestamp.now(),
@@ -73,7 +75,7 @@ class _MsgchatState extends State<Msgchat> {
     final ThemeData theme = Theme.of(context);
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        appBar: AppBar(title: Text('hayde')),
+        appBar: AppBar(title: Text(friendID)),
         body: Container(
           color: Colors.grey,
           width: double.infinity,
@@ -81,8 +83,8 @@ class _MsgchatState extends State<Msgchat> {
           child: StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance
                   .collection('chatRooms')
-                  .doc(login.Username)
-                  .collection(check[0])
+                  .doc(sortname)
+                  .collection('messages')
                   .orderBy('timestamp', descending: true)
                   .snapshots(),
               builder: (context, snapshot) {
@@ -156,7 +158,8 @@ class _MsgchatState extends State<Msgchat> {
                   IconButton(
                       onPressed: () {
                         setState(() {
-                          print(check);
+                          print('');
+                          print(sortname);
                         });
                       },
                       icon: Icon(Icons.abc)),

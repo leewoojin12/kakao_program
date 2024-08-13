@@ -1,4 +1,4 @@
-  // ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers, sized_box_for_whitespace, prefer_const_constructors_in_immutables, camel_case_types, depend_on_referenced_packages
+  // ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers, sized_box_for_whitespace, prefer_const_constructors_in_immutables, camel_case_types, depend_on_referenced_packages, avoid_print
 
 
   import 'package:flutter/material.dart';
@@ -29,28 +29,7 @@
   final TextEditingController _nicknameController = TextEditingController();
 
 
-  /*  // 서버 연결 상태 확인차 hello
-  Future<void> hello() async {
-    try {
-      print('시도합니다');
-      final response = await http.get(Uri.parse('http://192.168.123.102:8081/members/hello')).timeout(Duration(seconds: 10));
-      if (response.statusCode == 200) {
-        print('성공: ${response.body}');
-        setState(() {
-          inputText = response.body;
-        });
-      } else {
-        print('실패: ${response.statusCode}');
-      }
-    } on TimeoutException catch (_) {
-      print('연결 시간 초과');
-    } on SocketException catch (_) {
-      print('연결 거부됨');
-    } catch (e) {
-      print('오류 발생: $e');
-    }
-  }
-  */
+
 
     Future<void> _registerUser() async {
       try {
@@ -97,6 +76,7 @@
 
 
           print('Failed to register user: ${response.statusCode}');
+          // ignore: avoid_print
           print('Response body: ${response.body}');
         }
       } catch (e) {

@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'Msgchat.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'loginPage.dart' as login;
+
 
 class friendEdit extends StatelessWidget {
   friendEdit({
@@ -72,7 +74,7 @@ class friendEdit extends StatelessWidget {
               )),
               SizedBox(
                 width: 10,
-                height: 200,
+                height: 430 ,
                 child: Container(
                   width: 20,
                 ),
@@ -97,13 +99,13 @@ class friendEdit extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '우진',
+                        login.friendlist[0],
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 20),
                       ),
-                      Text('합격이냐 불합격이냐',
+                      Text(' ',
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w500,

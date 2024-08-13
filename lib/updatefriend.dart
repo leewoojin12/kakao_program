@@ -62,11 +62,8 @@ class updatefriend extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  people(),
-                  people(),
-                  people(),
-                  people(),
-                  people(),
+                  SizedBox(height: 60,)
+
                 ],
               ))
           // ignore: avoid_unnecessary_containers

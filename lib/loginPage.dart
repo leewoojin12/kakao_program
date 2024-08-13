@@ -1,16 +1,19 @@
-  // ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers, sized_box_for_whitespace, prefer_const_constructors_in_immutables, camel_case_types, depend_on_referenced_packages
+// ignore_for_file: use_super_parameters, avoid_unnecessary_containers, camel_case_types, unnecessary_import
+// ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, avoid_print, prefer_typing_uninitialized_variables, duplicate_ignore, prefer_const_literals_to_create_immutables\
 
-  library loginPage;
+
+library loginPage;
 
   import 'package:flutter/material.dart';
   import 'singUppage.dart';
   import 'package:http/http.dart' as http;
   import 'dart:async';
-
+  import 'main.dart' as setmain;
   import 'dart:convert';
 
-
+  String? sessionCookie;
   String Username= ' ';
+  List<String> friendlist =[];
 
   class Loginpage extends StatefulWidget {
     Loginpage({super.key});
@@ -44,7 +47,7 @@
           print(response.body);
           final data =json.decode(response.body);
           String memberInfo = ' ';
-          memberInfo = data;// 전체 JSON 응답 출력
+          memberInfo = data;// 전체 JSON 응답 출력q
 
 
           print(memberInfo);
@@ -87,13 +90,24 @@
 
         if (response.statusCode == 200) {
           // 로그인 성공 처리
+          String? rawCookie = response.headers['set-cookie'];
+          if (rawCookie != null) {
+            int index = rawCookie.indexOf(';');
+            sessionCookie = (index == -1) ? rawCookie : rawCookie.substring(0, index);
+            print("로그인 성공, 저장된 세션 쿠키: $sessionCookie");
+          }
           setState(() {
-            Username = response.body;
+            Username = _nickController.text;
+            setmain.setfriend.add(response.body);
+            friendlist = [response.body];
+            print('친구이름 : $friendlist');
+
+
 
           });
           Navigator.pushNamed(context, '/home');
 
-          print('User logged in successful  ly');
+          print('로그인 완료');
 
 
 
@@ -212,21 +226,4 @@
             );
           }
   }
-
-
-        class dilogUI extends StatelessWidget {
-          const dilogUI({super.key});
-
-          @override
-          Widget build(BuildContext context) {
-            return Dialog(child: Container(
-              height: 50,
-              width: 50,
-              alignment: Alignment.center,
-              child: Text(Alreadymember),
-
-            )
-            );
-          }
-        }
 
